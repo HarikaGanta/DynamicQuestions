@@ -1,0 +1,11 @@
+#root {
+  width: 60%;
+  height: 90%;
+  background-color: aqua;
+  overflow-y: scroll;
+
+}
+
+.form-preview{
+  display: block;
+}
