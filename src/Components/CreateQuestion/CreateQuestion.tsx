@@ -1,25 +1,30 @@
 import './CreateQuestion.css'
-// import {  } from 'react'
-import {Question} from '../Form'
 import QuestionType from '../QuestionType';
 import { useState } from 'react';
+import { QInputs } from '../../App';
+
 interface QuestionProps{
     id:string,
-    setQuestions:React.Dispatch<React.SetStateAction<Question[]>>,
+    setQuestions: Function,
+    setQuestionInputs: Function,
+    questionInputs: QInputs
+  
 }
 
-export default function CreateQuestion({id,setQuestions}:QuestionProps){
+
+
+export default function CreateQuestion({id,setQuestions,setQuestionInputs,questionInputs}:QuestionProps){
     // const [qtype,setQtype]=useState("text");
     const [questionDetails,setQuestionDetails]=useState({
         question:"",
         required:false,
         qtype:"text"
-    })
+    });
+    
 
     const deleteQuestion=(id:string)=>{
-        setQuestions((prevquestions)=>prevquestions.filter((question)=> question.id!==id));
-    }
-    
+        setQuestions((prevquestions: { id: string }[]) => prevquestions.filter((question) => question.id !== id));
+    }  
    
     
     return <>
@@ -37,7 +42,7 @@ export default function CreateQuestion({id,setQuestions}:QuestionProps){
             <input type="button" value="Delete Question" onClick={()=>deleteQuestion(id)}/>  
             <label htmlFor={`required-${id}`}> <input type="checkbox" name="required" id={`required-${id}`} /> Required  </label>   
         </div>
-        <QuestionType qtype={questionDetails.qtype}/>
+        <QuestionType qtype={questionDetails.qtype} questionInputs={questionInputs} setQuestionInputs={setQuestionInputs}  />
 
     </div>
     
